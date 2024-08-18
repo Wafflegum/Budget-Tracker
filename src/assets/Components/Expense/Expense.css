@@ -1,0 +1,89 @@
+.expense-container {
+	padding: 1rem;
+	box-sizing: border-box;
+
+	border-radius: 1rem;
+
+	background: var(--primary-background);
+
+	border: 1.25px solid var(--shadow);
+
+	/* box-shadow: 0px 8px 12px var(--shadow); */
+
+	display: flex;
+}
+
+.expense-main-content {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.expense-info {
+	flex: 1 1 auto;
+
+	display: flex;
+	gap: 2rem;
+}
+
+.expense-amount {
+	display: flex;
+	align-items: center;
+}
+
+.button-container {
+	display: flex;
+	gap: 0.5rem;
+	justify-self: flex-end;
+}
+
+.button-container button {
+	width: 1rem;
+	opacity: 0.7;
+
+	display: flex;
+	align-items: center;
+
+	padding: 0;
+
+	background: none;
+	outline: none;
+	border: none;
+
+	cursor: pointer;
+}
+
+.button-container button img {
+	width: 100%;
+}
+
+.input-container input {
+	font-family: inherit;
+	font-size: inherit;
+	width: 6rem;
+
+	outline: 0;
+	border: 0;
+
+	text-align: right;
+}
+
+.input-container {
+	padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+
+	display: flex;
+	align-items: center;
+
+	box-sizing: border-box;
+	background: white;
+
+	border-radius: 0.5rem;
+}
+
+.input-container:focus-within {
+	outline: 1px solid var(--shadow);
+}
+
+.expense-name .input-container input {
+	text-align: left;
+}
