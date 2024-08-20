@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Expense.css'
 
-const Expense = ({ id, name, amount, categories, EditExpense }) => {
+const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) => {
 	const [editMode, setEditMode] = useState(false)
 
 	const [expenseName, setExpenseName] = useState(name || '')
@@ -26,6 +26,11 @@ const Expense = ({ id, name, amount, categories, EditExpense }) => {
 			setEditMode(true)
 			alert('All fields must be filled')
 		}
+	}
+
+	function handleDelete() {
+		console.log('deleted ' + id)
+		DeleteExpense(id)
 	}
 
 	useEffect(() => {
@@ -53,7 +58,7 @@ const Expense = ({ id, name, amount, categories, EditExpense }) => {
 						)}
 					</form>
 					<div className="button-container">
-						<button id="deleteBtn">
+						<button id="deleteBtn" onClick={handleDelete}>
 							<img src="./delete-icon.svg" alt="" />
 						</button>
 						<button id="editBtn" onClick={() => handleEditMode()}>
