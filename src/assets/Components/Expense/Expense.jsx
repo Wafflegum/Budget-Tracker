@@ -1,19 +1,35 @@
 import { useState, useEffect } from 'react'
 import './Expense.css'
 
-const Expense = ({ name, amount, categories, EditExpense }) => {
+const Expense = ({ id, name, amount, categories, EditExpense }) => {
 	const [editMode, setEditMode] = useState(false)
 
-	const [expenseName, setExpenseName] = useState('')
+	const [expenseName, setExpenseName] = useState(name || '')
+	const [expenseAmount, setExpenseAmount] = useState(amount || 0)
 
 	function FinalizeEdit(e) {
-		e.preventDefault()
-		edit()
-		setEditMode(false)
+		// const prevExpenseName = expenseName
+		if (e && typeof e.preventDefault === 'function') {
+			e.preventDefault()
+		}
+
+		if (expenseName && expenseAmount) {
+			EditExpense(id, expenseName, expenseAmount)
+			setEditMode(false)
+		}
+	}
+
+	function handleEditMode() {
+		if (expenseName && expenseAmount) {
+			setEditMode(!editMode)
+		} else {
+			setEditMode(true)
+			alert('All fields must be filled')
+		}
 	}
 
 	useEffect(() => {
-		setEditMode(true)
+		if (!name) setEditMode(true)
 	}, [name])
 
 	return (
@@ -28,8 +44,7 @@ const Expense = ({ name, amount, categories, EditExpense }) => {
 									type="text"
 									name=""
 									id="nameInput"
-									placeholder={name}
-									value={expenseName}
+									placeholder={expenseName ? expenseName : 'Name'}
 									onChange={(e) => setExpenseName(e.target.value)}
 								/>
 							</div>
@@ -41,23 +56,31 @@ const Expense = ({ name, amount, categories, EditExpense }) => {
 						<button id="deleteBtn">
 							<img src="./delete-icon.svg" alt="" />
 						</button>
-						<button id="editBtn" onClick={() => setEditMode(!editMode)}>
+						<button id="editBtn" onClick={() => handleEditMode()}>
 							<img src="./edit-icon.svg" alt="" />
 						</button>
 					</div>
 				</div>
 				<div className="expense-categories">Pleasure</div>
 			</div>
-			<div className="expense-amount">
+			<form className="expense-amount" onSubmit={(e) => FinalizeEdit(e)}>
 				{editMode ? (
 					<div className="input-container">
 						<span>PHP</span>
-						<input type="number" name="" id="amountInput" placeholder={amount} />
+						<input
+							type="number"
+							name=""
+							id="amountInput"
+							placeholder={expenseAmount}
+							onChange={(e) => {
+								setExpenseAmount(e.target.value)
+							}}
+						/>
 					</div>
 				) : (
-					`PHP ${amount}`
+					`PHP ${expenseAmount}`
 				)}
-			</div>
+			</form>
 		</div>
 	)
 }
