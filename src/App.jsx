@@ -4,11 +4,13 @@ import './App.css'
 import BudgetCard from './assets/Components/BudgetCard/BudgetCard'
 import './assets/Components/BudgetCard/BudgetCard'
 import Expense from './assets/Components/Expense/Expense'
-function App() {
-	const [totalExpenses, setTotalExpenses] = useState(0)
-	const [expensesData, setExpensesData] = useState([])
-	const [budget, setBudget] = useState(0)
 
+function App() {
+	const [budget, setBudget] = useState(0)
+	const [totalExpenses, setTotalExpenses] = useState(0)
+	const [remainingBudget, setRemainingBudget] = useState(0)
+
+	const [expensesData, setExpensesData] = useState([])
 	const [newExpense, setNewExpense] = useState({})
 
 	function SetBudget(amount) {
@@ -27,18 +29,25 @@ function App() {
 		LoadExpenses()
 	}, [])
 
-	function CalculateTotalExpenses(data) {
-		setTotalExpenses(data.reduce((total, expense) => total + parseFloat(expense.amount), 0))
+	useEffect(() => {
+		Calculate(expensesData)
+	}, [expensesData, Calculate])
+
+	function Calculate(data) {
+		if (typeof data != 'undefined') {
+			setTotalExpenses(data.reduce((total, expense) => total + parseFloat(expense.amount), 0))
+		}
+		setRemainingBudget(parseFloat(budget) - parseFloat(totalExpenses))
 	}
 
 	function handleDeleteExpense(id) {
 		const updatedExpenseList = expensesData.filter((expense) => expense.id !== id)
 		setExpensesData(updatedExpenseList)
-		CalculateTotalExpenses(updatedExpenseList)
+		Calculate(updatedExpenseList)
 	}
 
 	function CreateNewExpense() {
-		const newExpense = { id: crypto.randomUUID(), name: '', amount: '' }
+		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0 }
 
 		setExpensesData((prevExpenses) => [...prevExpenses, newExpense])
 
@@ -50,7 +59,7 @@ function App() {
 			const updatedExpenseList = prevExpensesData.map((expense) => {
 				return expense.id === id ? { ...expense, name, amount } : expense
 			})
-			CalculateTotalExpenses(updatedExpenseList)
+			Calculate(updatedExpenseList)
 
 			const jsonExpenseData = JSON.stringify(updatedExpenseList)
 			localStorage.setItem('expenses', jsonExpenseData)
@@ -68,9 +77,9 @@ function App() {
 		<main>
 			<h1>Budget Tracker</h1>
 			<div className="budget-container">
-				<BudgetCard title={'Total Budget'} value={'15,000'} EditBudget={SetBudget} />
+				<BudgetCard title={'Total Budget'} value={budget} EditBudget={SetBudget} />
 				<BudgetCard title={'Total Expenses'} value={totalExpenses} />
-				<BudgetCard title={'Remaining Budget'} value={'15,000'} />
+				<BudgetCard title={'Remaining Budget'} value={remainingBudget} />
 			</div>
 
 			<div className="expense-list-container">

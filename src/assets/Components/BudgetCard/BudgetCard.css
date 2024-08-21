@@ -1,6 +1,9 @@
 .card-container {
-	width: 15%;
+	min-width: 15%;
+	width: fit-content;
 	height: fit-content;
+
+	gap: 1rem;
 
 	padding: 1rem 1rem 1rem 1rem;
 
@@ -9,13 +12,59 @@
 	border-radius: 1rem;
 
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	align-items: center;
+}
+
+.info {
+	flex: 1;
 }
 
 .budget-title {
 	font-size: 1rem;
 }
-.budget-value {
+.budget-value-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+
 	font-size: 1.5rem;
+
+	padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+
+	box-sizing: border-box;
+
+	border-radius: 0.5rem;
+}
+.budget-input-container {
+	width: 12.5rem;
+
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+
+	font-size: 1.5rem;
+
+	padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+
+	box-sizing: border-box;
+
+	border-radius: 0.5rem;
+}
+
+.budget-input-container:focus-within {
+	outline: 1px solid var(--shadow);
+}
+
+#budgetAmountInput {
+	flex: 1;
+
+	font-family: inherit;
+	font-size: inherit;
+	width: 100%;
+
+	outline: 0;
+	border: 0;
+	padding: 0;
+
+	background: none;
 }
