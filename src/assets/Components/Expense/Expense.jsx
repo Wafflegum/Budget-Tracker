@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import './Expense.css'
 
-const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) => {
+const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => {
 	const [editMode, setEditMode] = useState(false)
 
-	const [expenseName, setExpenseName] = useState(name || '')
-	const [expenseAmount, setExpenseAmount] = useState(amount || 0)
+	const [expenseName, setName] = useState(name || '')
+	const [expenseAmount, setAmount] = useState(amount || 0)
+	const [expenseCategory, setCategory] = useState(category || '')
 
 	function FinalizeEdit(e) {
 		// const prevExpenseName = expenseName
@@ -14,7 +15,7 @@ const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) =
 		}
 
 		if (expenseName && expenseAmount) {
-			EditExpense(id, expenseName, expenseAmount)
+			EditExpense(id, expenseName, expenseAmount, expenseCategory)
 			setEditMode(false)
 		}
 	}
@@ -50,7 +51,7 @@ const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) =
 									name=""
 									id="nameInput"
 									placeholder={expenseName ? expenseName : 'Name'}
-									onChange={(e) => setExpenseName(e.target.value)}
+									onChange={(e) => setName(e.target.value)}
 								/>
 							</div>
 						) : (
@@ -66,7 +67,42 @@ const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) =
 						</button>
 					</div>
 				</div>
-				<div className="expense-categories">Pleasure</div>
+				<div className="expense-categories">
+					{editMode ? (
+						<select
+							autoComplete
+							name="Categories"
+							id="categoryInput"
+							onInput={(e) => setCategory(e.target.value)}
+						>
+							<option value="" id="dropdownPlaceholder" disabled selected>
+								Select a Category
+							</option>
+							<optgroup label="Essentials">
+								<option value="Housing">Housing</option>
+								<option value="Groceries">Groceries</option>
+								<option value="Utilities">Utilities</option>
+								<option value="Transportation">Transportation</option>
+								<option value="Debt Payment">Debt Payment</option>
+							</optgroup>
+							<optgroup label="Non-essential">
+								<option value="Entertainment">Entertainment</option>
+								<option value="Shopping">Shopping</option>
+								<option value="Dine-out">Dine-out</option>
+							</optgroup>
+							<optgroup label="Savings & Investments">
+								<option value="Savings">Savings</option>
+							</optgroup>
+							<optgroup label="Miscellaneous">
+								<option value="Personal Care">Personal Care</option>
+								<option value="Hobbies">Hobbies</option>
+								<option value="Miscellaneous">Miscellaneous</option>
+							</optgroup>
+						</select>
+					) : (
+						expenseCategory
+					)}
+				</div>
 			</div>
 			<form className="expense-amount" onSubmit={(e) => FinalizeEdit(e)}>
 				{editMode ? (
@@ -78,7 +114,7 @@ const Expense = ({ id, name, amount, categories, EditExpense, DeleteExpense }) =
 							id="amountInput"
 							placeholder={expenseAmount}
 							onChange={(e) => {
-								setExpenseAmount(e.target.value)
+								setAmount(e.target.value)
 							}}
 						/>
 					</div>

@@ -17,6 +17,7 @@
 	flex: 1 1 auto;
 	display: flex;
 	flex-direction: column;
+	gap: 0.25rem;
 }
 
 .expense-info {
@@ -80,6 +81,7 @@
 	background: white;
 
 	border-radius: 0.5rem;
+	outline: 1px solid var(--shadow);
 }
 
 .input-container:focus-within {
@@ -88,4 +90,15 @@
 
 .expense-name .input-container input {
 	text-align: left;
+}
+
+#categoryInput {
+	font-size: inherit;
+
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.5rem;
+
+	border: 0;
+	outline: 1px solid var(--shadow);
+	color: inherit;
 }

@@ -11,18 +11,26 @@ function App() {
 	const [remainingBudget, setRemainingBudget] = useState(0)
 
 	const [expensesData, setExpensesData] = useState([])
-	const [newExpense, setNewExpense] = useState({})
 
 	function SetBudget(amount) {
 		setBudget(parseFloat(amount))
+		console.log(budget)
+		Save(null, amount)
 	}
 
 	function LoadExpenses() {
 		const storedExpenses = localStorage.getItem('expenses')
+		const storedBudgetSummary = localStorage.getItem('budgetSummary')
 
 		if (storedExpenses != null) {
 			const jsonExpenseData = JSON.parse(storedExpenses)
 			setExpensesData(jsonExpenseData)
+		}
+		if (storedBudgetSummary != null) {
+			const jsonBudgetSummary = JSON.parse(storedBudgetSummary)
+			setBudget(jsonBudgetSummary.budget)
+			setTotalExpenses(jsonBudgetSummary.totalExpenses)
+			setRemainingBudget(jsonBudgetSummary.remainingBudget)
 		}
 	}
 	useEffect(() => {
@@ -33,6 +41,7 @@ function App() {
 		Calculate(expensesData)
 	}, [expensesData, Calculate])
 
+	// Calculates all the budget and expenses
 	function Calculate(data) {
 		if (typeof data != 'undefined') {
 			setTotalExpenses(data.reduce((total, expense) => total + parseFloat(expense.amount), 0))
@@ -47,22 +56,30 @@ function App() {
 	}
 
 	function CreateNewExpense() {
-		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0 }
+		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0, categories: [] }
 
 		setExpensesData((prevExpenses) => [...prevExpenses, newExpense])
 
 		setNewExpense(null)
 	}
 
-	function handleEditExpense(id, name, amount) {
+	function Save(expenseList, updatedBudget) {
+		if (expenseList) {
+			const jsonExpenseData = JSON.stringify(expenseList)
+			localStorage.setItem('expenses', jsonExpenseData)
+		}
+		const budgetSummary = JSON.stringify({ budget: updatedBudget, totalExpenses, remainingBudget })
+		localStorage.setItem('budgetSummary', budgetSummary)
+	}
+
+	function handleEditExpense(id, name, amount, category) {
 		setExpensesData((prevExpensesData) => {
 			const updatedExpenseList = prevExpensesData.map((expense) => {
-				return expense.id === id ? { ...expense, name, amount } : expense
+				return expense.id === id ? { ...expense, name, amount, category } : expense
 			})
 			Calculate(updatedExpenseList)
 
-			const jsonExpenseData = JSON.stringify(updatedExpenseList)
-			localStorage.setItem('expenses', jsonExpenseData)
+			Save(updatedExpenseList)
 			return updatedExpenseList
 		})
 
@@ -97,7 +114,7 @@ function App() {
 									id={expense.id}
 									name={expense.name}
 									amount={expense.amount}
-									categories={expense.categories}
+									category={expense.category}
 									EditExpense={handleEditExpense}
 									DeleteExpense={handleDeleteExpense}
 								/>
