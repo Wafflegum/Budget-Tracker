@@ -21,7 +21,7 @@ h1 {
 }
 
 .expense-list-container {
-	width: 40%;
+	flex: 1 1 40%;
 	height: 100%;
 
 	padding: 1.5rem;
@@ -37,8 +37,35 @@ h1 {
 	box-shadow: 0px 20px 20px hsla(210, 26%, 21%, 0.15);
 }
 
+.expense-list-container button {
+	background: #009688;
+	color: white;
+
+	border: 0;
+	outline: 0;
+
+	padding: 0.5rem 0.8rem;
+	border-radius: 0.5rem;
+
+	transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.expense-list-container button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0px 8px 8px var(--shadow);
+}
+
 header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.main-content {
+	display: flex;
+	flex: 1;
+}
+
+.budget-charts {
+	flex: 1 1 50%;
 }

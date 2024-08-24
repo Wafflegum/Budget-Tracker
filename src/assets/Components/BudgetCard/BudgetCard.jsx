@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './BudgetCard.css'
 
-const BudgetCard = ({ title, value, EditBudget }) => {
+const BudgetCard = ({ title, value, EditBudget, background, textColor }) => {
 	const [editMode, setEditMode] = useState(false)
 
 	function handleSubmit(e) {
@@ -10,7 +10,13 @@ const BudgetCard = ({ title, value, EditBudget }) => {
 	}
 
 	return (
-		<div className="card-container">
+		<div
+			className="card-container"
+			style={{ background: background, color: textColor }}
+			onDoubleClick={() => {
+				setEditMode(true)
+			}}
+		>
 			{editMode ? (
 				<div className="info">
 					<div className="budget-title">{title}</div>
@@ -31,7 +37,7 @@ const BudgetCard = ({ title, value, EditBudget }) => {
 					<div className="budget-title">{title}</div>
 					<div className="budget-value-container">
 						<div>PHP</div>
-						<div className="budget-value">{value}</div>
+						<div className="budget-value">{isNaN(value) ? 0 : value}</div>
 					</div>
 				</div>
 			)}

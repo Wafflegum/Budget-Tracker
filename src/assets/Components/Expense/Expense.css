@@ -3,14 +3,22 @@
 	box-sizing: border-box;
 
 	border-radius: 1rem;
-
 	background: var(--primary-background);
 
-	border: 1.25px solid var(--shadow);
-
-	/* box-shadow: 0px 8px 12px var(--shadow); */
+	outline: 1.25px solid rgba(0, 0, 0, 0.1);
 
 	display: flex;
+	transition: all 0.1s ease;
+
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
+
+.expense-container:hover {
+	box-shadow: 0px 8px 12px var(--shadow);
+	transform: translateY(-5px);
+	outline: 0;
 }
 
 .expense-main-content {
@@ -78,10 +86,13 @@
 	align-items: center;
 
 	box-sizing: border-box;
-	background: white;
+
+	background: var(--secondary-background);
 
 	border-radius: 0.5rem;
 	outline: 1px solid var(--shadow);
+
+	transition: all 0.1s ease;
 }
 
 .input-container:focus-within {

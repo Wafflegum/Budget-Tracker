@@ -39,7 +39,12 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 	}, [name])
 
 	return (
-		<div className="expense-container">
+		<div
+			className="expense-container"
+			onDoubleClick={() => {
+				if (!editMode) handleEditMode()
+			}}
+		>
 			<div className="expense-main-content">
 				<div className="expense-info">
 					<form className="expense-name" onSubmit={(e) => FinalizeEdit(e)}>
@@ -70,7 +75,7 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 				<div className="expense-categories">
 					{editMode ? (
 						<select
-							autoComplete
+							autoComplete="true"
 							name="Categories"
 							id="categoryInput"
 							onInput={(e) => setCategory(e.target.value)}

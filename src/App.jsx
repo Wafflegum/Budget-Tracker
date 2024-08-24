@@ -5,6 +5,8 @@ import BudgetCard from './assets/Components/BudgetCard/BudgetCard'
 import './assets/Components/BudgetCard/BudgetCard'
 import Expense from './assets/Components/Expense/Expense'
 
+import BarChart from './assets/Components/BarChart/BarChart'
+
 function App() {
 	const [budget, setBudget] = useState(0)
 	const [totalExpenses, setTotalExpenses] = useState(0)
@@ -14,8 +16,22 @@ function App() {
 
 	function SetBudget(amount) {
 		setBudget(parseFloat(amount))
-		console.log(budget)
 		Save(null, amount)
+	}
+
+	function Save(expenseList, updatedBudget) {
+		if (expenseList) {
+			const jsonExpenseData = JSON.stringify(expenseList)
+			localStorage.setItem('expenses', jsonExpenseData)
+		}
+
+		const validatedBudget = updatedBudget != null ? updatedBudget : budget // this will check if the updatedBudget parameter is null or not. If it's null, assign the budget useState value
+		// const validatedBudget = typeof updatedBudget !== 'undefined' ? updatedBudget : budget
+
+		// * Above is the same as implemented. Shortened as I don't see any problem with it. Though I didn't search anything regarding it lol
+
+		const budgetSummary = JSON.stringify({ budget: validatedBudget, totalExpenses, remainingBudget })
+		localStorage.setItem('budgetSummary', budgetSummary)
 	}
 
 	function LoadExpenses() {
@@ -53,23 +69,13 @@ function App() {
 		const updatedExpenseList = expensesData.filter((expense) => expense.id !== id)
 		setExpensesData(updatedExpenseList)
 		Calculate(updatedExpenseList)
+		Save(updatedExpenseList)
 	}
 
 	function CreateNewExpense() {
 		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0, categories: [] }
 
 		setExpensesData((prevExpenses) => [...prevExpenses, newExpense])
-
-		setNewExpense(null)
-	}
-
-	function Save(expenseList, updatedBudget) {
-		if (expenseList) {
-			const jsonExpenseData = JSON.stringify(expenseList)
-			localStorage.setItem('expenses', jsonExpenseData)
-		}
-		const budgetSummary = JSON.stringify({ budget: updatedBudget, totalExpenses, remainingBudget })
-		localStorage.setItem('budgetSummary', budgetSummary)
 	}
 
 	function handleEditExpense(id, name, amount, category) {
@@ -95,32 +101,41 @@ function App() {
 			<h1>Budget Tracker</h1>
 			<div className="budget-container">
 				<BudgetCard title={'Total Budget'} value={budget} EditBudget={SetBudget} />
+				<BudgetCard
+					title={'Remaining Budget'}
+					value={remainingBudget}
+					background={remainingBudget <= 0 ? 'var(--warning-budget)' : 'var(--secondary-background)'}
+					textColor={remainingBudget <= 0 ? '#c24242' : 'inherit'}
+				/>
 				<BudgetCard title={'Total Expenses'} value={totalExpenses} />
-				<BudgetCard title={'Remaining Budget'} value={remainingBudget} />
 			</div>
 
-			<div className="expense-list-container">
-				<header>
-					<button id="addExpense" onClick={CreateNewExpense}>
-						Add Expense
-					</button>
-				</header>
-
-				{expensesData
-					? expensesData.map((expense) => {
-							return (
-								<Expense
-									key={expense.id}
-									id={expense.id}
-									name={expense.name}
-									amount={expense.amount}
-									category={expense.category}
-									EditExpense={handleEditExpense}
-									DeleteExpense={handleDeleteExpense}
-								/>
-							)
-					  })
-					: ''}
+			<div className="main-content">
+				<div className="expense-list-container">
+					<header>
+						<button id="addExpense" onClick={CreateNewExpense}>
+							Add Expense
+						</button>
+					</header>
+					{expensesData
+						? expensesData.map((expense) => {
+								return (
+									<Expense
+										key={expense.id}
+										id={expense.id}
+										name={expense.name}
+										amount={expense.amount}
+										category={expense.category}
+										EditExpense={handleEditExpense}
+										DeleteExpense={handleDeleteExpense}
+									/>
+								)
+						  })
+						: ''}
+				</div>
+				<div className="budget-charts">
+					<BarChart expenseData={expensesData} />
+				</div>
 			</div>
 		</main>
 	)

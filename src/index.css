@@ -6,8 +6,14 @@
 
 :root {
 	--primary-background: #f5f9ff;
-	--secondary-background: #fafcff;
+	--secondary-background: #ffffffc4;
 	--shadow: hsla(210, 26%, 21%, 0.15);
+
+	--budget-card: rgb(233, 255, 241);
+	--total-exp: rgb(250, 232, 255);
+	--remaining-budget: rgb(210, 255, 208);
+
+	--warning-budget: rgb(255, 238, 243);
 }
 
 html,
