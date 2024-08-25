@@ -9,12 +9,18 @@ const BudgetCard = ({ title, value, EditBudget, background, textColor }) => {
 		setEditMode(false)
 	}
 
+	function handleEditMode() {
+		if (EditBudget != null) {
+			setEditMode(!editMode)
+		}
+	}
+
 	return (
 		<div
 			className="card-container"
 			style={{ background: background, color: textColor }}
 			onDoubleClick={() => {
-				setEditMode(true)
+				handleEditMode()
 			}}
 		>
 			{editMode ? (
@@ -44,7 +50,7 @@ const BudgetCard = ({ title, value, EditBudget, background, textColor }) => {
 
 			{EditBudget ? (
 				<div className="button-container">
-					<button id="editBudgetBtn" onClick={() => setEditMode(!editMode)}>
+					<button id="editBudgetBtn" onClick={() => handleEditMode()}>
 						<img src="./edit-icon.svg" alt="" />
 					</button>
 				</div>

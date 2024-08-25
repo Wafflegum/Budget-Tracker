@@ -6,36 +6,38 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 // Register the required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-const BarChart = ({ expenseData }) => {
-	const [categoryLabelList, setCategoryLabelList] = useState([])
-	const [values, setValues] = useState([])
+const BarChart = ({ expenses }) => {
+	const [data, setData] = useState([])
 
 	useEffect(() => {
-		if (expenseData.length > 0) {
-			const categoryLabel = expenseData.map((expense) => {
-				return expense.category
-			})
-			const extractedValues = expenseData.map((expense) => {
-				return expense.amount
-			})
+		if (Array.isArray(expenses) && expenses.length > 0) {
+			const updatedData = []
 
-			setCategoryLabelList(categoryLabel)
-			setValues(extractedValues)
+			expenses.forEach((item) => {
+				let duplicate = updatedData.find((duplicate) => duplicate.category === item.category)
+				if (duplicate) {
+					duplicate.amount = parseFloat(duplicate.amount) + parseFloat(item.amount)
+				} else {
+					updatedData.push({ ...item })
+				}
+			})
+			console.log(updatedData)
+			setData(updatedData)
 		}
-	}, [expenseData])
+	}, [expenses])
 
-	const data = {
-		labels: categoryLabelList,
+	const chartData = {
+		labels: data.map((expense) => expense.category),
 		datasets: [
 			{
 				label: 'Amount',
-				data: values, // Sample data
+				data: data.map((expense) => expense.amount), // Sample data
 				backgroundColor: ['#a7eba0', '#f86c63', '#6193bd'], // Different colors for each bar
 			},
 		],
 	}
 
-	const options = {
+	const chartOptions = {
 		responsive: true,
 		plugins: {
 			legend: {
@@ -50,7 +52,7 @@ const BarChart = ({ expenseData }) => {
 
 	return (
 		<div className="chart-container">
-			<Bar data={data} options={options} />
+			<Bar data={chartData} options={chartOptions} />
 		</div>
 	)
 }

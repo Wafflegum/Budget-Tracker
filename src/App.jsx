@@ -60,7 +60,7 @@ function App() {
 	// Calculates all the budget and expenses
 	function Calculate(data) {
 		if (typeof data != 'undefined') {
-			setTotalExpenses(data.reduce((total, expense) => total + parseFloat(expense.amount), 0))
+			setTotalExpenses(data.reduce((accumulator, expense) => accumulator + parseFloat(expense.amount), 0))
 		}
 		setRemainingBudget(parseFloat(budget) - parseFloat(totalExpenses))
 	}
@@ -73,7 +73,7 @@ function App() {
 	}
 
 	function CreateNewExpense() {
-		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0, categories: [] }
+		const newExpense = { id: crypto.randomUUID(), name: '', amount: 0, category: '' }
 
 		setExpensesData((prevExpenses) => [...prevExpenses, newExpense])
 	}
@@ -134,7 +134,7 @@ function App() {
 						: ''}
 				</div>
 				<div className="budget-charts">
-					<BarChart expenseData={expensesData} />
+					<BarChart expenses={expensesData} />
 				</div>
 			</div>
 		</main>

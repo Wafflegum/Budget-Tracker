@@ -79,8 +79,9 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 							name="Categories"
 							id="categoryInput"
 							onInput={(e) => setCategory(e.target.value)}
+							defaultValue=""
 						>
-							<option value="" id="dropdownPlaceholder" disabled selected>
+							<option value="" id="dropdownPlaceholder" disabled>
 								Select a Category
 							</option>
 							<optgroup label="Essentials">
