@@ -1,4 +1,6 @@
 .expense-container {
+	display: flex;
+	gap: 1rem;
 	padding: 1rem;
 	box-sizing: border-box;
 
@@ -7,7 +9,6 @@
 
 	outline: 1.25px solid rgba(0, 0, 0, 0.1);
 
-	display: flex;
 	transition: all 0.1s ease;
 
 	-webkit-user-select: none; /* Safari */
@@ -41,6 +42,7 @@
 }
 
 .button-container {
+	margin: auto;
 	display: flex;
 	gap: 0.5rem;
 	justify-self: flex-end;
@@ -53,17 +55,28 @@
 	display: flex;
 	align-items: center;
 
-	padding: 0;
+	padding: 0rem;
+	box-sizing: border-box;
 
 	background: none;
 	outline: none;
 	border: none;
+
+	transition: transform 0.05s ease;
 
 	cursor: pointer;
 }
 
 .button-container button img {
 	width: 100%;
+}
+
+.button-container button:hover {
+	transform: scale(1.1);
+}
+
+.button-container button img:hover {
+	filter: drop-shadow(0px 4px 3px #0000003a);
 }
 
 .input-container input {

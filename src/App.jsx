@@ -134,7 +134,7 @@ function App() {
 						: ''}
 				</div>
 				<div className="budget-charts">
-					<BarChart expenses={expensesData} />
+					<BarChart importData={expensesData} />
 				</div>
 			</div>
 		</main>

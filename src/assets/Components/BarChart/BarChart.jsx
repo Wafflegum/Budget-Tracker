@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Bar } from 'react-chartjs-2'
+import { Bar, Pie } from 'react-chartjs-2'
+import './BarChart.css'
 
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
 // Register the required components
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
-const BarChart = ({ expenses }) => {
+const BarChart = ({ importData }) => {
 	const [data, setData] = useState([])
 
 	useEffect(() => {
-		if (Array.isArray(expenses) && expenses.length > 0) {
+		if (Array.isArray(importData) && importData.length > 0) {
 			const updatedData = []
 
-			expenses.forEach((item) => {
+			importData.forEach((item) => {
 				let duplicate = updatedData.find((duplicate) => duplicate.category === item.category)
 				if (duplicate) {
 					duplicate.amount = parseFloat(duplicate.amount) + parseFloat(item.amount)
@@ -24,7 +25,7 @@ const BarChart = ({ expenses }) => {
 			console.log(updatedData)
 			setData(updatedData)
 		}
-	}, [expenses])
+	}, [importData])
 
 	const chartData = {
 		labels: data.map((expense) => expense.category),
@@ -33,6 +34,7 @@ const BarChart = ({ expenses }) => {
 				label: 'Amount',
 				data: data.map((expense) => expense.amount), // Sample data
 				backgroundColor: ['#a7eba0', '#f86c63', '#6193bd'], // Different colors for each bar
+				borderWidth: 0,
 			},
 		],
 	}
@@ -41,7 +43,7 @@ const BarChart = ({ expenses }) => {
 		responsive: true,
 		plugins: {
 			legend: {
-				display: false,
+				display: true,
 			},
 			title: {
 				display: true,
@@ -52,7 +54,7 @@ const BarChart = ({ expenses }) => {
 
 	return (
 		<div className="chart-container">
-			<Bar data={chartData} options={chartOptions} />
+			<Pie data={chartData} options={chartOptions} />
 		</div>
 	)
 }

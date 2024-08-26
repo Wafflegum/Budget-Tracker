@@ -1,0 +1,9 @@
+.chart-container {
+	height: fit-content;
+	width: fit-content;
+	padding: 2rem;
+	box-sizing: border-box;
+
+	background: var(--secondary-background);
+	border-radius: 1rem;
+}

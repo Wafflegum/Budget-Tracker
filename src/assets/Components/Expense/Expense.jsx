@@ -63,15 +63,8 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 							expenseName
 						)}
 					</form>
-					<div className="button-container">
-						<button id="deleteBtn" onClick={handleDelete}>
-							<img src="./delete-icon.svg" alt="" />
-						</button>
-						<button id="editBtn" onClick={() => handleEditMode()}>
-							<img src="./edit-icon.svg" alt="" />
-						</button>
-					</div>
 				</div>
+
 				<div className="expense-categories">
 					{editMode ? (
 						<select
@@ -110,6 +103,7 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 					)}
 				</div>
 			</div>
+
 			<form className="expense-amount" onSubmit={(e) => FinalizeEdit(e)}>
 				{editMode ? (
 					<div className="input-container">
@@ -128,6 +122,15 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 					`PHP ${expenseAmount}`
 				)}
 			</form>
+
+			<div className="button-container">
+				<button id="deleteBtn" onClick={handleDelete}>
+					<img src="./delete-icon.svg" alt="" />
+				</button>
+				<button id="editBtn" onClick={() => handleEditMode()}>
+					<img src="./edit-icon.svg" alt="" />
+				</button>
+			</div>
 		</div>
 	)
 }
