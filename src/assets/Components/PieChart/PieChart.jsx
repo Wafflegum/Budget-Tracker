@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Bar, Pie } from 'react-chartjs-2'
-import './BarChart.css'
+import { Pie } from 'react-chartjs-2'
+import './PieChart.css'
 
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
 // Register the required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
-const BarChart = ({ importData }) => {
+const PieChart = ({ title, importData }) => {
 	const [data, setData] = useState([])
 
 	useEffect(() => {
@@ -47,7 +47,7 @@ const BarChart = ({ importData }) => {
 			},
 			title: {
 				display: true,
-				text: 'Budget Overview',
+				text: title,
 			},
 		},
 	}
@@ -59,4 +59,4 @@ const BarChart = ({ importData }) => {
 	)
 }
 
-export default BarChart
+export default PieChart

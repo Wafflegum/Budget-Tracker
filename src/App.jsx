@@ -4,8 +4,7 @@ import './App.css'
 import BudgetCard from './assets/Components/BudgetCard/BudgetCard'
 import './assets/Components/BudgetCard/BudgetCard'
 import Expense from './assets/Components/Expense/Expense'
-
-import BarChart from './assets/Components/BarChart/BarChart'
+import PieChart from './assets/Components/PieChart/PieChart'
 
 function App() {
 	const [budget, setBudget] = useState(0)
@@ -134,7 +133,20 @@ function App() {
 						: ''}
 				</div>
 				<div className="budget-charts">
-					<BarChart importData={expensesData} />
+					<PieChart title="Expense Overview" importData={expensesData} />
+					<PieChart
+						title="Budget Overview"
+						importData={[
+							{
+								category: 'Total Expenses',
+								amount: totalExpenses,
+							},
+							{
+								category: 'Remaining Budget',
+								amount: remainingBudget,
+							},
+						]}
+					/>
 				</div>
 			</div>
 		</main>

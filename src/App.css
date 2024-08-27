@@ -70,4 +70,7 @@ header {
 
 .budget-charts {
 	flex: 1 1 50%;
+
+	display: flex;
+	gap: 2rem;
 }
