@@ -98,55 +98,59 @@ function App() {
 	return (
 		<main>
 			<h1>Budget Tracker</h1>
-			<div className="budget-container">
-				<BudgetCard title={'Total Budget'} value={budget} EditBudget={SetBudget} />
-				<BudgetCard
-					title={'Remaining Budget'}
-					value={remainingBudget}
-					background={remainingBudget <= 0 ? 'var(--warning-budget)' : 'var(--secondary-background)'}
-					textColor={remainingBudget <= 0 ? '#c24242' : 'inherit'}
-				/>
-				<BudgetCard title={'Total Expenses'} value={totalExpenses} />
-			</div>
 
 			<div className="main-content">
-				<div className="expense-list-container">
-					<header>
-						<button id="addExpense" onClick={CreateNewExpense}>
-							Add Expense
-						</button>
-					</header>
-					{expensesData
-						? expensesData.map((expense) => {
-								return (
-									<Expense
-										key={expense.id}
-										id={expense.id}
-										name={expense.name}
-										amount={expense.amount}
-										category={expense.category}
-										EditExpense={handleEditExpense}
-										DeleteExpense={handleDeleteExpense}
-									/>
-								)
-						  })
-						: ''}
-				</div>
-				<div className="budget-charts">
-					<PieChart title="Expense Overview" importData={expensesData} />
-					<PieChart
-						title="Budget Overview"
-						importData={[
-							{
-								category: 'Total Expenses',
-								amount: totalExpenses,
-							},
-							{
-								category: 'Remaining Budget',
-								amount: remainingBudget,
-							},
-						]}
-					/>
+				<section>
+					<div className="budget-container">
+						<BudgetCard title={'Total Budget'} value={budget} EditBudget={SetBudget} />
+						<BudgetCard
+							title={'Remaining Budget'}
+							value={remainingBudget}
+							background={remainingBudget <= 0 ? 'var(--warning-budget)' : 'var(--secondary-background)'}
+							textColor={remainingBudget <= 0 ? '#c24242' : 'inherit'}
+						/>
+						<BudgetCard title={'Total Expenses'} value={totalExpenses} />
+					</div>
+					<div className="budget-charts">
+						<PieChart title="Expense Overview" importData={expensesData} />
+						<PieChart
+							title="Budget Overview"
+							importData={[
+								{
+									category: 'Total Expenses',
+									amount: totalExpenses,
+								},
+								{
+									category: 'Remaining Budget',
+									amount: remainingBudget,
+								},
+							]}
+						/>
+					</div>
+				</section>
+				<div className="main-content">
+					<div className="expense-list-container">
+						<header>
+							<button id="addExpense" onClick={CreateNewExpense}>
+								Add Expense
+							</button>
+						</header>
+						{expensesData
+							? expensesData.map((expense) => {
+									return (
+										<Expense
+											key={expense.id}
+											id={expense.id}
+											name={expense.name}
+											amount={expense.amount}
+											category={expense.category}
+											EditExpense={handleEditExpense}
+											DeleteExpense={handleDeleteExpense}
+										/>
+									)
+							  })
+							: ''}
+					</div>
 				</div>
 			</div>
 		</main>

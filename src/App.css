@@ -2,7 +2,7 @@ main {
 	width: 100%;
 	height: 100%;
 
-	padding: 1rem 2rem 1rem 2rem;
+	padding: 2.5rem 5rem;
 	box-sizing: border-box;
 
 	display: flex;
@@ -12,16 +12,41 @@ main {
 }
 h1 {
 	margin: 0;
+	text-align: center;
 }
+
 .budget-container {
+	flex: 1 1 auto;
 	width: 100%;
+
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+
 	gap: 2rem;
 }
 
+.budget-charts {
+	flex: 1 1 60%;
+
+	display: flex;
+	gap: 2rem;
+}
+
+main section {
+	display: flex;
+	flex-direction: column;
+
+	gap: 2rem;
+}
+
+main span {
+	display: flex;
+	flex-direction: row;
+}
+
 .expense-list-container {
-	flex: 1 1 40%;
+	flex: 1 1 100%;
 	height: 100%;
 
 	padding: 1.5rem;
@@ -63,13 +88,6 @@ header {
 
 .main-content {
 	flex: 1 1 auto;
-
-	display: flex;
-	gap: 2rem;
-}
-
-.budget-charts {
-	flex: 1 1 50%;
 
 	display: flex;
 	gap: 2rem;
