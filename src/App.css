@@ -10,6 +10,7 @@ main {
 
 	gap: 2rem;
 }
+
 h1 {
 	margin: 0;
 	text-align: center;
@@ -34,6 +35,7 @@ h1 {
 }
 
 main section {
+	flex: 1 1 40%;
 	display: flex;
 	flex-direction: column;
 
@@ -56,10 +58,10 @@ main span {
 	flex-direction: column;
 	gap: 0.5rem;
 
-	border-radius: 1rem;
+	border-radius: 1.5rem;
 
 	background: var(--secondary-background);
-	box-shadow: 0px 20px 20px hsla(210, 26%, 21%, 0.15);
+	box-shadow: 0px 20px 20px var(--shadow-color);
 }
 
 .expense-list-container #addExpense {
@@ -77,7 +79,7 @@ main span {
 
 .expense-list-container #addExpense:hover {
 	transform: translateY(-2px);
-	box-shadow: 0px 8px 8px var(--shadow);
+	box-shadow: 0px 8px 8px var(--shadow-color);
 }
 
 header {
@@ -87,8 +89,36 @@ header {
 }
 
 .main-content {
-	flex: 1 1 auto;
+	flex: 1 1 60%;
 
 	display: flex;
 	gap: 2rem;
+}
+
+@media only screen and (max-width: 1280px) {
+	main {
+		gap: 1rem;
+
+		padding: 1.5rem 3rem;
+	}
+	main section {
+		gap: 1rem;
+	}
+	.main-content {
+		gap: 1rem;
+	}
+	.budget-container {
+		gap: 1rem;
+	}
+	.budget-charts {
+		gap: 1rem;
+	}
+}
+
+@media only screen and (max-width: 475px) {
+	.main-content {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }

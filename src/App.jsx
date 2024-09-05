@@ -106,7 +106,7 @@ function App() {
 						<BudgetCard
 							title={'Remaining Budget'}
 							value={remainingBudget}
-							background={remainingBudget <= 0 ? 'var(--warning-budget)' : 'var(--secondary-background)'}
+							background={remainingBudget < 0 ? 'var(--warning-budget)' : 'var(--secondary-background)'}
 							textColor={remainingBudget <= 0 ? '#c24242' : 'inherit'}
 						/>
 						<BudgetCard title={'Total Expenses'} value={totalExpenses} />

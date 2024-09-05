@@ -7,7 +7,7 @@
 :root {
 	--primary-background: #f5f9ff;
 	--secondary-background: #ffffffc4;
-	--shadow: hsla(210, 26%, 21%, 0.15);
+	--shadow-color: hsla(210, 26%, 21%, 0.15);
 
 	--budget-card: rgb(233, 255, 241);
 	--total-exp: rgb(250, 232, 255);
@@ -40,4 +40,10 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
 	-moz-appearance: textfield;
+}
+
+@media only screen and (max-width: 1280px) {
+	body {
+		font-size: 0.85rem;
+	}
 }

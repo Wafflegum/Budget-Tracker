@@ -43,17 +43,14 @@ const PieChart = ({ title, importData }) => {
 		responsive: true,
 		plugins: {
 			legend: {
-				display: true,
-			},
-			title: {
-				display: true,
-				text: title,
+				display: false,
 			},
 		},
 	}
 
 	return (
 		<div className="chart-container">
+			<div className="chart-title">{title}</div>
 			<Pie data={chartData} options={chartOptions} />
 		</div>
 	)
