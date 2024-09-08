@@ -1,5 +1,4 @@
 .chart-container {
-	width: 100%;
 	padding: 2rem;
 	box-sizing: border-box;
 
@@ -19,5 +18,25 @@
 	.chart-container {
 		width: 15rem;
 		height: 100%;
+	}
+}
+
+@media only screen and (max-width: 475px) {
+	.chart-container {
+		width: 10rem;
+		height: 100%;
+		background: none;
+		box-shadow: none;
+
+		padding: 0rem 1rem;
+	}
+
+	.chart-title {
+		flex: 1 1 auto;
+		text-align: center;
+		font-size: 0.85rem;
+
+		display: flex;
+		align-items: center;
 	}
 }

@@ -48,7 +48,7 @@ main span {
 }
 
 .expense-list-container {
-	flex: 1 1 100%;
+	flex: 1 1 60%;
 	height: 100%;
 
 	padding: 1.5rem;
@@ -116,9 +116,26 @@ header {
 }
 
 @media only screen and (max-width: 475px) {
+	section {
+		width: 100%;
+	}
+	.budget-charts {
+		width: 100%;
+		background: none;
+	}
 	.main-content {
+		width: 100%;
+
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+
+	main {
+		padding: 1rem 2rem;
+	}
+
+	.expense-list-container {
+		width: 100%;
 	}
 }

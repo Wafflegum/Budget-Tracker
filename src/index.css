@@ -19,6 +19,9 @@
 html,
 body,
 #root {
+	min-width: 100%;
+	min-height: 100%;
+
 	width: 100%;
 	height: 100%;
 
@@ -45,5 +48,17 @@ input[type='number'] {
 @media only screen and (max-width: 1280px) {
 	body {
 		font-size: 0.85rem;
+	}
+}
+
+@media only screen and (max-width: 475px) {
+	body {
+		font-size: 0.85rem;
+	}
+
+	html,
+	body {
+		width: 100%;
+		height: 100%;
 	}
 }

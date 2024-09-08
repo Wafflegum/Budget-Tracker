@@ -128,29 +128,27 @@ function App() {
 						/>
 					</div>
 				</section>
-				<div className="main-content">
-					<div className="expense-list-container">
-						<header>
-							<button id="addExpense" onClick={CreateNewExpense}>
-								Add Expense
-							</button>
-						</header>
-						{expensesData
-							? expensesData.map((expense) => {
-									return (
-										<Expense
-											key={expense.id}
-											id={expense.id}
-											name={expense.name}
-											amount={expense.amount}
-											category={expense.category}
-											EditExpense={handleEditExpense}
-											DeleteExpense={handleDeleteExpense}
-										/>
-									)
-							  })
-							: ''}
-					</div>
+				<div className="expense-list-container">
+					<header>
+						<button id="addExpense" onClick={CreateNewExpense}>
+							Add Expense
+						</button>
+					</header>
+					{expensesData
+						? expensesData.map((expense) => {
+								return (
+									<Expense
+										key={expense.id}
+										id={expense.id}
+										name={expense.name}
+										amount={expense.amount}
+										category={expense.category}
+										EditExpense={handleEditExpense}
+										DeleteExpense={handleDeleteExpense}
+									/>
+								)
+						  })
+						: ''}
 				</div>
 			</div>
 		</main>

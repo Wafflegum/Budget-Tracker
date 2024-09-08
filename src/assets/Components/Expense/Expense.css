@@ -126,3 +126,21 @@
 	outline: 1px solid var(--shadow-color);
 	color: inherit;
 }
+
+@media only screen and (max-width: 475px) {
+	.expense-container {
+		gap: 0.5rem;
+	}
+	.input-container {
+		font-size: 0.85rem;
+		width: 100%;
+	}
+
+	#categoryInput {
+		width: 100%;
+	}
+
+	#amountInput {
+		width: 100%;
+	}
+}
