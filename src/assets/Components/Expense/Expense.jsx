@@ -56,6 +56,7 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 									name=""
 									id="nameInput"
 									placeholder={expenseName ? expenseName : 'Name'}
+									value={expenseName ? expenseName : ''}
 									onChange={(e) => setName(e.target.value)}
 								/>
 							</div>
@@ -72,7 +73,7 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 							name="Categories"
 							id="categoryInput"
 							onInput={(e) => setCategory(e.target.value)}
-							defaultValue=""
+							defaultValue={expenseCategory}
 						>
 							<option value="" id="dropdownPlaceholder" disabled>
 								Select a Category
@@ -113,9 +114,11 @@ const Expense = ({ id, name, amount, category, EditExpense, DeleteExpense }) => 
 							name=""
 							id="amountInput"
 							placeholder={expenseAmount}
+							value={expenseAmount}
 							onChange={(e) => {
 								setAmount(e.target.value)
 							}}
+							step="0.01"
 						/>
 					</div>
 				) : (

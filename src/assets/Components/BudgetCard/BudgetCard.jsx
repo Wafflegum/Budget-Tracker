@@ -34,7 +34,9 @@ const BudgetCard = ({ title, value, EditBudget, background, textColor }) => {
 							name="Budget Amount"
 							id="budgetAmountInput"
 							placeholder={value}
+							value={value}
 							onChange={(e) => EditBudget(e.target.value)}
+							step="0.01"
 						/>
 					</form>
 				</div>
