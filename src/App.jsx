@@ -61,7 +61,8 @@ function App() {
 		if (typeof data != 'undefined') {
 			setTotalExpenses(data.reduce((accumulator, expense) => accumulator + parseFloat(expense.amount), 0))
 		}
-		setRemainingBudget(parseFloat(budget) - parseFloat(totalExpenses))
+		const remainingBudget = parseFloat(budget) - parseFloat(totalExpenses)
+		setRemainingBudget(remainingBudget.toFixed(2))
 	}
 
 	function handleDeleteExpense(id) {
